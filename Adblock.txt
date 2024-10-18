@@ -1,7 +1,2 @@
-youtube.com##ytd-in-feed-ad-layout-renderer
 reddit.com##[noun="reddit_logo"]
-m.youtube.com##[id^="rectangle_yt"], c3-icon.ringo-logo>span>div>svg>path:not([class]):not([id])
-developer.mozilla.org##.visible, .toc-container > .place
-open.spotify.com##.O7ooKKJG0MArEwDgD6IV
-inshorts.com/en/read##^script:has-text(nuisanceCode)
 onlineradiofm.in##header, .breadcrumb, h1
