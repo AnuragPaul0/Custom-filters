@@ -16,9 +16,10 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
       const lastModifiedDate = new Date(lastModified);
 
       const localTime = lastModifiedDate.toLocaleString();
-
+      s = localTime.split(', '), c = s[1].split(':')
+      if ( +c[0] >= 12) { c[0]-= 12 } c[0] = s[0] + ', '+ c[0]
       document.getElementById("file-age").textContent =
-        "Updated every hour, last update " + localTime;
+        "Updated every hour, last update " + c.join(":"
     }
   })
   .catch((error) => {
@@ -39,37 +40,37 @@ const options = {
   mediaControls: false,
 };
 
-const wavesurfer = WaveSurfer.create(options);
+// const wavesurfer = WaveSurfer.create(options);
 
-wavesurfer.on("ready", (duration) => {
-  const loader = document.getElementById("loader");
-  if (loader) loader.remove();
+// wavesurfer.on("ready", (duration) => {
+//   const loader = document.getElementById("loader");
+//   if (loader) loader.remove();
 
-  const button = document.getElementById("playPauseBtn");
-  if (button) button.focus();
-});
+//   const button = document.getElementById("playPauseBtn");
+//   if (button) button.focus();
+// });
 
-document
-  .getElementById("playPauseBtn")
-  .addEventListener("click", function () {
-    wavesurfer.playPause();
-  });
+// document
+//   .getElementById("playPauseBtn")
+//   .addEventListener("click", function () {
+//     wavesurfer.playPause();
+//   });
 
-const speeds = [0.5, 1, 1.5, 2, 3];
-// Set the playback rate
-document.getElementById("speedRange").addEventListener("input", (e) => {
-  const speed = speeds[e.target.valueAsNumber];
-  document.querySelector("#rate").textContent = speed.toFixed(1);
-  wavesurfer.setPlaybackRate(speed, true);
-  wavesurfer.play();
-});
+// const speeds = [0.5, 1, 1.5, 2, 3];
+// // Set the playback rate
+// document.getElementById("speedRange").addEventListener("input", (e) => {
+//   const speed = speeds[e.target.valueAsNumber];
+//   document.querySelector("#rate").textContent = speed.toFixed(1);
+//   wavesurfer.setPlaybackRate(speed, true);
+//   wavesurfer.play();
+// });
 
-const volumeSlider = document.getElementById("volume-slider");
-const outputContainer = document.getElementById("volume-output");
+// const volumeSlider = document.getElementById("volume-slider");
+// const outputContainer = document.getElementById("volume-output");
 
-volumeSlider.addEventListener("input", (e) => {
-  const value = e.target.value;
+// volumeSlider.addEventListener("input", (e) => {
+//   const value = e.target.value;
 
-  outputContainer.textContent = value;
-  wavesurfer.media.volume = value / 100;
-})
+//   outputContainer.textContent = value;
+//   wavesurfer.media.volume = value / 100;
+// })
