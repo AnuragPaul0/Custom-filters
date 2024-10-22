@@ -7,6 +7,10 @@
 
 // queryString = `cachebuster=${day}${month}${year}${hour}`;
 // kat = 0
+dq = (x) => { k = d.querySelector(x)
+  // , console.log(k)
+  return k }
+
 fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
   method: "HEAD",
 })
@@ -38,9 +42,9 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
 //   audioRate: 1,
 //   hideScrollbar: false,
 //   mediaControls: false,
-// };
-
-wavesurfere = WaveSurfer.create({...options, plugins: [
+// }
+dq('#waveform > div').remove()
+let wavesurfere = WaveSurfer.create({...options, plugins: [
   WaveSurfer.Hover.create({
     lineColor: '#ff0000',
     lineWidth: 2,
@@ -48,7 +52,7 @@ wavesurfere = WaveSurfer.create({...options, plugins: [
     labelColor: '#fff',
     labelSize: '11px',
   }),
-]});
+]})
 
 // wavesurfer.on("ready", (duration) => {
 //   const loader = document.getElementById("loader");
