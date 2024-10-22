@@ -6,7 +6,7 @@
 // hour = String(now.getUTCHours()).padStart(2, "0");
 
 // queryString = `cachebuster=${day}${month}${year}${hour}`;
-
+kat = 0
 fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
   method: "HEAD",
 })
