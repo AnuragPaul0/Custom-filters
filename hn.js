@@ -1,11 +1,11 @@
 // console.log(1)
-now = new Date();
-day = String(now.getUTCDate()).padStart(2, "0");
-month = String(now.getUTCMonth() + 1).padStart(2, "0");
-year = String(now.getUTCFullYear()).slice(-2);
-hour = String(now.getUTCHours()).padStart(2, "0");
+// now = new Date();
+// day = String(now.getUTCDate()).padStart(2, "0");
+// month = String(now.getUTCMonth() + 1).padStart(2, "0");
+// year = String(now.getUTCFullYear()).slice(-2);
+// hour = String(now.getUTCHours()).padStart(2, "0");
 
-queryString = `cachebuster=${day}${month}${year}${hour}`;
+// queryString = `cachebuster=${day}${month}${year}${hour}`;
 
 fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
   method: "HEAD",
@@ -24,21 +24,21 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
   })
   .catch((error) => {
     console.error("Error fetching file headers:", error);
-  });
+  })
 
-options = {
-  container: "#waveform",
-  height: 128,
-  waveColor: "#ccc4af",
-  progressColor: "#f5c542",
-  url: `https://cdn.hnup.date/generated_audio.mp3?${queryString}`,
-  barWidth: 4,
-  cursorWidth: 4,
-  dragToSeek: false,
-  audioRate: 1,
-  hideScrollbar: false,
-  mediaControls: false,
-};
+// options = {
+//   container: "#waveform",
+//   height: 128,
+//   waveColor: "#ccc4af",
+//   progressColor: "#f5c542",
+//   url: `https://cdn.hnup.date/generated_audio.mp3?${queryString}`,
+//   barWidth: 4,
+//   cursorWidth: 4,
+//   dragToSeek: false,
+//   audioRate: 1,
+//   hideScrollbar: false,
+//   mediaControls: false,
+// };
 
 // wavesurfer = WaveSurfer.create(options);
 
