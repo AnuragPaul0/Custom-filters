@@ -1,11 +1,11 @@
 // console.log(1)
-const now = new Date();
-const day = String(now.getUTCDate()).padStart(2, "0");
-const month = String(now.getUTCMonth() + 1).padStart(2, "0");
-const year = String(now.getUTCFullYear()).slice(-2);
-const hour = String(now.getUTCHours()).padStart(2, "0");
+now = new Date();
+day = String(now.getUTCDate()).padStart(2, "0");
+month = String(now.getUTCMonth() + 1).padStart(2, "0");
+year = String(now.getUTCFullYear()).slice(-2);
+hour = String(now.getUTCHours()).padStart(2, "0");
 
-const queryString = `cachebuster=${day}${month}${year}${hour}`;
+queryString = `cachebuster=${day}${month}${year}${hour}`;
 
 fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
   method: "HEAD",
@@ -26,7 +26,7 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
     console.error("Error fetching file headers:", error);
   });
 
-const options = {
+options = {
   container: "#waveform",
   height: 128,
   waveColor: "#ccc4af",
@@ -40,7 +40,7 @@ const options = {
   mediaControls: false,
 };
 
-// const wavesurfer = WaveSurfer.create(options);
+// wavesurfer = WaveSurfer.create(options);
 
 // wavesurfer.on("ready", (duration) => {
 //   const loader = document.getElementById("loader");
