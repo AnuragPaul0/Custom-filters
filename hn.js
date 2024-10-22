@@ -19,7 +19,7 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
       s = localTime.split(', '), c = s[1].split(':')
       if ( +c[0] >= 12) { c[0]-= 12 } c[0] = s[0] + ', '+ c[0]
       document.getElementById("file-age").textContent =
-        "Updated every hour, last update " + c.join(":"
+        "Updated every hour, last update " + c.join(":")
     }
   })
   .catch((error) => {
