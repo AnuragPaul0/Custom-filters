@@ -7,7 +7,7 @@
 
 // queryString = `cachebuster=${day}${month}${year}${hour}`;
 // kat = 0
-dq = (x) => { k = d.querySelector(x)
+d = document, dq = (x) => { k = d.querySelector(x)
   // , console.log(k)
   return k }
 
