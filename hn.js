@@ -40,7 +40,15 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
 //   mediaControls: false,
 // };
 
-// wavesurfer = WaveSurfer.create(options);
+wavesurfere = WaveSurfer.create({...options, plugins: [
+  Hover.create({
+    lineColor: '#ff0000',
+    lineWidth: 2,
+    labelBackground: '#555',
+    labelColor: '#fff',
+    labelSize: '11px',
+  }),
+]});
 
 // wavesurfer.on("ready", (duration) => {
 //   const loader = document.getElementById("loader");
