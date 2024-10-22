@@ -42,9 +42,9 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
 //   audioRate: 1,
 //   hideScrollbar: false,
 //   mediaControls: false,
-// }
+// }Plugin
 dq('#waveform > div').remove()
-let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.TimelinePlugin.create(),
+let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Timeline.create(),
   WaveSurfer.Hover.create({
     lineColor: '#ff0000',
     lineWidth: 2,
