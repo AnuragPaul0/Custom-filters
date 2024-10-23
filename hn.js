@@ -2,17 +2,7 @@
 d = document, dq = (x) => { k = d.querySelector(x)
   // , console.log(k)
   return k }
-constructed = (c) => {
-    // Create an empty "constructed" stylesheet
-    sheet = new CSSStyleSheet()
-    // Apply a rule to the sheet
-    sheet.replaceSync(c)
 
-    // Apply the stylesheet to a document, a[i] = 0, le-- 
-d.adoptedStyleSheets = [sheet] }
-
-constructed(`html, h1, #waveform, button { filter: invert(1) }
-#waveform ::part(hover-label):before { filter: invert(1); content: '⏱️ ' }` )
 fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
   method: "HEAD",
 })
@@ -32,8 +22,6 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
     console.error("Error fetching file headers:", error);
   })
 
-max = 20
-
 // Create your own media element
 const audio = new Audio()
 audio.controls = true
@@ -42,16 +30,15 @@ audio.src = options.url
 delete options.url; Object.assign(options, {media: audio})
 // options2 = options; options2['url'] = 
 // Create a WaveSurfer instance and pass the media element
+max = 20
 let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Hover.create({
     lineColor: '#ff0000', lineWidth: 2,
     labelBackground: '#555',
     labelColor: '#fff',
-    labelSize: '11px' }), WaveSurfer.Timeline.create({
-  height: 20, timeInterval: 5,
+    labelSize: '11px' }), WaveSurfer.Timeline.create({ height: 20, timeInterval: 5,
   primaryLabelInterval: max,
-  // secondaryLabelInterval: max/2,
-  style: { fontSize: '20px',
-    color: '#6A3274',
+  secondaryLabelInterval: max,
+  style: { fontSize: '20px', color: '#6A3274',
   } }) ]})
 // Now, create a Web Audio equalizer
 
