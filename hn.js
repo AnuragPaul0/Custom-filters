@@ -40,19 +40,16 @@ let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Timeline.
   height: 20, timeInterval: 10,
   primaryLabelInterval: 20,
   // secondaryLabelInterval: 1,
-  style: {
-    fontSize: '20px',
+  style: { fontSize: '20px',
     color: '#6A3274',
-  },
-}),
+  } }),
   WaveSurfer.Hover.create({
     lineColor: '#ff0000',
     lineWidth: 2,
     labelBackground: '#555',
     labelColor: '#fff',
     labelSize: '11px',
-  })
-]})
+  }) ]})
 // console.log(1)
 // now = new Date();
 // day = String(now.getUTCDate()).padStart(2, "0");
@@ -62,11 +59,15 @@ let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Timeline.
 
 // queryString = `cachebuster=${day}${month}${year}${hour}`;
 
-wavesurfer.on("ready", () => { dq('#waveform > div').remove() })
+wavesurfer.on("ready", () => { dq('#waveform > div').remove()
+  old_element = document.getElementById("playPauseBtn")
+  var new_element = old_element.cloneNode(true)
+  new_element.addEventListener("click", function () {
+    wavesurfere.playPause()
+   })
+old_element.parentNode.replaceChild(new_element, old_element) } )
 
-d.getElementById("playPauseBtn")
-  .addEventListener("click", function () {
-    wavesurfere.playPause() })
+// d.getElementById("playPauseBtn")
 // const speeds = [0.5, 1, 1.5, 2, 3];
 // // Set the playback rate
 // document.getElementById("speedRange").addEventListener("input", (e) => {
