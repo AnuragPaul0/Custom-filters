@@ -35,7 +35,8 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
 //   hideScrollbar: false,
 //   mediaControls: false,
 // }Plugin
-dq('#waveform > div').remove()
+
+
 let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Timeline.create({
   height: 20, timeInterval: 20,
   // primaryLabelInterval: 5,
@@ -62,20 +63,12 @@ let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Timeline.
 
 // queryString = `cachebuster=${day}${month}${year}${hour}`;
 
-// wavesurfer.on("ready", (duration) => {
-//   const loader = document.getElementById("loader");
-//   if (loader) loader.remove();
+wavesurfer.on("ready", () => { dq('#waveform > div').remove() })
 
-//   const button = document.getElementById("playPauseBtn");
-//   if (button) button.focus();
-// });
-
-// document
-//   .getElementById("playPauseBtn")
-//   .addEventListener("click", function () {
-//     wavesurfer.playPause();
-//   });
-
+d.getElementById("playPauseBtn")
+  .addEventListener("click", function () {
+    wavesurfere.playPause()
+  })
 // const speeds = [0.5, 1, 1.5, 2, 3];
 // // Set the playback rate
 // document.getElementById("speedRange").addEventListener("input", (e) => {
