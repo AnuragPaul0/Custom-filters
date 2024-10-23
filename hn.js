@@ -74,8 +74,10 @@ audio.addEventListener(
     equalizer.connect(audioContext.destination)
 }, { once: true } )
 
-// Create a vertical slider for each band
-const container = document.createElement('p')
+// Create a vertical slider for each band.idequalizer
+const container = document.createElement('p');
+container.className = 'flex'
+
 filters.forEach((filter, i) => {
   const slider = document.createElement('input')
   slider.type = 'range'
@@ -83,7 +85,7 @@ filters.forEach((filter, i) => {
   slider.style.writingMode = 'vertical-lr'
   slider.style.direction = 'rtl'
   // slider.style.appearance = 'slider-vertical'
-  // slider.style.width = '8%'
+  slider.style.width = 'auto'
   slider.min = -40
   slider.max = 40
   slider.value = filter.gain.value
@@ -92,7 +94,7 @@ filters.forEach((filter, i) => {
   // container
   // and give it some content
   const newContent = document.createTextNode(eqBands[i])
-div = document.createElement('div')
+div = document.createElement('div'); 
 div.appendChild(newContent)
 div.appendChild(slider);
   // add the text node to the newly created div
