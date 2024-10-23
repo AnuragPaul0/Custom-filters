@@ -1,11 +1,3 @@
-// console.log(1)
-// now = new Date();
-// day = String(now.getUTCDate()).padStart(2, "0");
-// month = String(now.getUTCMonth() + 1).padStart(2, "0");
-// year = String(now.getUTCFullYear()).slice(-2);
-// hour = String(now.getUTCHours()).padStart(2, "0");
-
-// queryString = `cachebuster=${day}${month}${year}${hour}`;
 // kat = 0
 d = document, dq = (x) => { k = d.querySelector(x)
   // , console.log(k)
@@ -45,12 +37,12 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
 // }Plugin
 dq('#waveform > div').remove()
 let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Timeline.create({
-  height: 20, timeInterval: 0.2,
-  primaryLabelInterval: 5,
-  secondaryLabelInterval: 1,
+  height: 20, timeInterval: 10,
+  // primaryLabelInterval: 5,
+  // secondaryLabelInterval: 1,
   style: {
     fontSize: '20px',
-    color: '#2D5B88',
+    color: '#6A3274',
   },
 }),
   WaveSurfer.Hover.create({
@@ -61,6 +53,14 @@ let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Timeline.
     labelSize: '11px',
   })
 ]})
+// console.log(1)
+// now = new Date();
+// day = String(now.getUTCDate()).padStart(2, "0");
+// month = String(now.getUTCMonth() + 1).padStart(2, "0");
+// year = String(now.getUTCFullYear()).slice(-2);
+// hour = String(now.getUTCHours()).padStart(2, "0");
+
+// queryString = `cachebuster=${day}${month}${year}${hour}`;
 
 // wavesurfer.on("ready", (duration) => {
 //   const loader = document.getElementById("loader");
