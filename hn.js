@@ -39,7 +39,7 @@ max = 40
 let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Timeline.create({
   height: 20, timeInterval: max/2,
   primaryLabelInterval: max,
-  secondaryLabelInterval: max/5,
+  secondaryLabelInterval: 5,
   style: { fontSize: '20px',
     color: '#6A3274',
   } }),
