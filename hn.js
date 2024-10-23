@@ -36,20 +36,18 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
 //   mediaControls: false,
 // }Plugin
 max = 40
-let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Timeline.create({
+let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Hover.create({
+    lineColor: '#ff0000',
+    lineWidth: 2,
+    labelBackground: '#555',
+    labelColor: '#fff',
+    labelSize: '11px' }), WaveSurfer.Timeline.create({
   height: 20, timeInterval: max/2,
   primaryLabelInterval: max,
   secondaryLabelInterval: 5,
   style: { fontSize: '20px',
     color: '#6A3274',
-  } }),
-  WaveSurfer.Hover.create({
-    lineColor: '#ff0000',
-    lineWidth: 2,
-    labelBackground: '#555',
-    labelColor: '#fff',
-    labelSize: '11px',
-  }) ]})
+  } }) ]})
 // console.log(1)
 // now = new Date();
 // day = String(now.getUTCDate()).padStart(2, "0");
