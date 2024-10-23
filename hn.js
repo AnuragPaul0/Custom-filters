@@ -63,7 +63,11 @@ wavesurfer.on("ready", () => { dq('#waveform > div').remove()
     wavesurfere.playPause()
    })
 old_element.parentNode.replaceChild(new_element, old_element) } )
-
+/* <html><style>
+    #waveform ::part(hover-label):before {
+      content: '⏱️ ';
+    }
+  </style></html> */
 // d.getElementById("playPauseBtn")
 // const speeds = [0.5, 1, 1.5, 2, 3];
 // // Set the playback rate
