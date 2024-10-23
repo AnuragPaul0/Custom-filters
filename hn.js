@@ -37,14 +37,13 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
 // }Plugin
 max = 40
 let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Hover.create({
-    lineColor: '#ff0000',
-    lineWidth: 2,
+    lineColor: '#ff0000', lineWidth: 2,
     labelBackground: '#555',
     labelColor: '#fff',
     labelSize: '11px' }), WaveSurfer.Timeline.create({
-  height: 20, timeInterval: max/2,
+  height: 20, timeInterval: 5,
   primaryLabelInterval: max,
-  secondaryLabelInterval: 5,
+  secondaryLabelInterval: max/2,
   style: { fontSize: '20px',
     color: '#6A3274',
   } }) ]})
