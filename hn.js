@@ -35,7 +35,7 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
 //   hideScrollbar: false,
 //   mediaControls: false,
 // }Plugin
-max = 40
+max = 20
 let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Hover.create({
     lineColor: '#ff0000', lineWidth: 2,
     labelBackground: '#555',
@@ -43,7 +43,7 @@ let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Hover.cre
     labelSize: '11px' }), WaveSurfer.Timeline.create({
   height: 20, timeInterval: 5,
   primaryLabelInterval: max,
-  secondaryLabelInterval: max/2,
+  // secondaryLabelInterval: max/2,
   style: { fontSize: '20px',
     color: '#6A3274',
   } }) ]})
@@ -60,14 +60,8 @@ wavesurfer.on("ready", () => { dq('#waveform > div').remove()
   old_element = document.getElementById("playPauseBtn")
   var new_element = old_element.cloneNode(true)
   new_element.addEventListener("click", function () {
-    wavesurfere.playPause()
-   })
+    wavesurfere.playPause() })
 old_element.parentNode.replaceChild(new_element, old_element) } )
-/* <html><style>
-    #waveform ::part(hover-label):before {
-      content: '⏱️ ';
-    }
-  </style></html> */
 // d.getElementById("playPauseBtn")
 // const speeds = [0.5, 1, 1.5, 2, 3];
 // // Set the playback rate
