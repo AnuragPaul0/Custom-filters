@@ -32,8 +32,7 @@ delete options.url; Object.assign(options, {media: audio})
 // Create a WaveSurfer instance and pass the media element
 max = 20
 let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Hover.create({
-    lineColor: '#ff0000', lineWidth: 2,
-    labelBackground: '#555',
+    lineColor: '#ff0000', lineWidth: 2, labelBackground: '#555',
     labelColor: '#fff',
     labelSize: '11px' }), WaveSurfer.Timeline.create({ height: 20, timeInterval: 5,
   primaryLabelInterval: max,
@@ -73,9 +72,7 @@ audio.addEventListener(
 
     // Connect the filters to the audio output
     equalizer.connect(audioContext.destination)
-  },
-  { once: true },
-)
+}, { once: true } )
 
 // Create a vertical slider for each band
 const container = document.createElement('p')
@@ -99,8 +96,8 @@ div.appendChild(slider);
   // add the text node to the newly created div
   container.appendChild(div)
 })
-document.body.appendChild(container)
-// console.log(1)
+dq('.container').appendChild(container)
+// console.log(1)ocument.body
 // now = new Date();
 // day = String(now.getUTCDate()).padStart(2, "0");
 // month = String(now.getUTCMonth() + 1).padStart(2, "0");
