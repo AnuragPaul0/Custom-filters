@@ -37,7 +37,7 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
 // }Plugin
 dq('#waveform > div').remove()
 let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Timeline.create({
-  height: 20, timeInterval: 10,
+  height: 20, timeInterval: 20,
   // primaryLabelInterval: 5,
   // secondaryLabelInterval: 1,
   style: {
