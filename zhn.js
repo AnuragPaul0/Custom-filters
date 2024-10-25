@@ -32,7 +32,7 @@ max = 20
 let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Hover.create({
     lineColor: '#ff0000', lineWidth: 2, labelBackground: '#555',
     labelColor: '#fff',
-    labelSize: '11px' }), Timeline.create({ height: 20, timeInterval: 5,
+    labelSize: '11px' }), WaveSurfer.Timeline.create({ height: 20, timeInterval: 5,
   primaryLabelInterval: max,
   secondaryLabelInterval: max, secondaryLabelOpacity: .5,
   style: { fontSize: '20px', color: '#6A3274',
