@@ -39,6 +39,10 @@ let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Hover.cre
   secondaryLabelInterval: max, secondaryLabelOpacity: .5,
   style: { fontSize: '20px', color: '#6A3274',
   } }) ]})
+
+wavesurfere.on('click', () => {
+  wavesurfer.play()
+})
 // Now, create a Web Audio equalizer
 
 // Create Web Audio context
