@@ -36,7 +36,7 @@ let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Hover.cre
     labelColor: '#fff',
     labelSize: '11px' }), WaveSurfer.Timeline.create({ height: 20, timeInterval: 5,
   primaryLabelInterval: max,
-  secondaryLabelInterval: max,
+  secondaryLabelInterval: max, secondaryLabelOpacity: .5,
   style: { fontSize: '20px', color: '#6A3274',
   } }) ]})
 // Now, create a Web Audio equalizer
@@ -100,7 +100,7 @@ div.appendChild(slider);
   // add the text node to the newly created div
   container.appendChild(div)
 })
-dq('.container').appendChild(container)
+dq('.container.mt-sm').appendChild(container)
 // console.log(1)ocument.body
 // now = new Date();
 // day = String(now.getUTCDate()).padStart(2, "0");
