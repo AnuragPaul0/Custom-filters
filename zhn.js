@@ -5,8 +5,7 @@ d = document, dq = (x) => { k = d.querySelector(x)
 
 fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
   method: "HEAD",
-})
-  .then((response) => {
+}).then((response) => {
     const lastModified = response.headers.get("Last-Modified");
     if (lastModified) {
       const lastModifiedDate = new Date(lastModified);
@@ -17,17 +16,16 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
       document.getElementById("file-age").textContent =
         "Updated every hour, last update " + c.join(":")
     }
-  })
-  .catch((error) => {
+  }).catch((error) => {
     console.error("Error fetching file headers:", error);
-  })
+})
 
 // Create your own media element
-const audio = new Audio()
-audio.controls = true
-audio.src = options.url
+// const audio = new Audio()
+// audio.controls = true
+// audio.src = options.url
 
-delete options.url; Object.assign(options, {media: audio})
+// delete options.url; Object.assign(options, {media: audio})
 // options2 = options; options2['url'] = 
 // Create a WaveSurfer instance and pass the media element
 max = 20
@@ -40,71 +38,69 @@ let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Hover.cre
   style: { fontSize: '20px', color: '#6A3274',
   } }) ]})
 
-wavesurfere.on('click', () => {
-  wavesurfer.play()
-})
+// wavesurfere.on('click', () => { wavesurfer.play() })
 // Now, create a Web Audio equalizer
 
 // Create Web Audio context
-const audioContext = new AudioContext()
+// const audioContext = new AudioContext()
 
 // Define the equalizer bands
-const eqBands = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000]
+// const eqBands = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000]
 
 // Create a biquad filter for each band
-const filters = eqBands.map((band) => {
-  const filter = audioContext.createBiquadFilter()
-  filter.type = band <= 32 ? 'lowshelf' : band >= 16000 ? 'highshelf' : 'peaking'
-  filter.gain.value = Math.random() * 40 - 20
-  filter.Q.value = 1 // resonance
-  filter.frequency.value = band // the cut-off frequency
-  return filter
-})
+// const filters = eqBands.map((band) => {
+//   const filter = audioContext.createBiquadFilter()
+//   filter.type = band <= 32 ? 'lowshelf' : band >= 16000 ? 'highshelf' : 'peaking'
+//   filter.gain.value = Math.random() * 40 - 20
+//   filter.Q.value = 1 // resonance
+//   filter.frequency.value = band // the cut-off frequency
+//   return filter
+// })
 
 // Connect the audio to the equalizer
-audio.addEventListener(
-  'canplay',
-  () => {
-    // Create a MediaElementSourceNode from the audio element
-    const mediaNode = audioContext.createMediaElementSource(audio)
+// audio.addEventListener(
+//   'canplay',
+//   () => {
+//     // Create a MediaElementSourceNode from the audio element
+//     const mediaNode = audioContext.createMediaElementSource(audio)
 
-    // Connect the filters and media node sequentially
-    const equalizer = filters.reduce((prev, curr) => {
-      prev.connect(curr)
-      return curr
-    }, mediaNode)
+//     // Connect the filters and media node sequentially
+//     const equalizer = filters.reduce((prev, curr) => {
+//       prev.connect(curr)
+//       return curr
+//     }, mediaNode)
 
-    // Connect the filters to the audio output
-    equalizer.connect(audioContext.destination)
-}, { once: true } )
+//     // Connect the filters to the audio output
+//     equalizer.connect(audioContext.destination)
+// }, { once: true } )
 
 // Create a vertical slider for each band.idequalizer
-const container = document.createElement('p');
+// const container = document.createElement('p');
 // container
 
-filters.forEach((filter, i) => {
-  const slider = document.createElement('input')
-  slider.type = 'range'
-  slider.orient = 'vertical'
-  slider.style.writingMode = 'vertical-lr'
-  slider.style.direction = 'rtl'
-  // slider.style.appearance = 'slider-vertical'
-  slider.style.width = 'auto'
-  slider.min = -40
-  slider.max = 40
-  slider.value = filter.gain.value
-  slider.step = 0.1
-  slider.oninput = (e) => (filter.gain.value = e.target.value)
-  // container
-  // and give it some content
-  const newContent = document.createTextNode(eqBands[i])
-div = document.createElement('div'); div.className = 'flex'
-div.appendChild(newContent)
-div.appendChild(slider);
-  // add the text node to the newly created div
-  container.appendChild(div)
-})
-dq('.container.mt-sm').appendChild(container)
+// filters.forEach((filter, i) => {
+//   const slider = document.createElement('input')
+//   slider.type = 'range'
+//   slider.orient = 'vertical'
+//   slider.style.writingMode = 'vertical-lr'
+//   slider.style.direction = 'rtl'
+//   // slider.style.appearance = 'slider-vertical'
+//   slider.style.width = 'auto'
+//   slider.min = -40
+//   slider.max = 40
+//   slider.value = filter.gain.value
+//   slider.step = 0.1
+//   slider.oninput = (e) => (filter.gain.value = e.target.value)
+//   // container
+//   // and give it some content
+//   const newContent = document.createTextNode(eqBands[i])
+// div = document.createElement('div'); div.className = 'flex'
+// div.appendChild(newContent)
+// div.appendChild(slider);
+//   // add the text node to the newly created div
+//   container.appendChild(div)
+// })
+// dq('.container.mt-sm').appendChild(container)
 // console.log(1)ocument.body
 // now = new Date();
 // day = String(now.getUTCDate()).padStart(2, "0");
