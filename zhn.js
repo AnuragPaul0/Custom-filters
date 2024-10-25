@@ -32,11 +32,15 @@ max = 20
 let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Hover.create({
     lineColor: '#ff0000', lineWidth: 2, labelBackground: '#555',
     labelColor: '#fff',
-    labelSize: '11px' }), WaveSurfer.Timeline.create({ height: 20, timeInterval: 5,
+    labelSize: '11px' }), Timeline.create({ height: 20, timeInterval: 5,
   primaryLabelInterval: max,
   secondaryLabelInterval: max, secondaryLabelOpacity: .5,
   style: { fontSize: '20px', color: '#6A3274',
-  } }) ]})
+  } }), WaveSurfer.Spectrogram.create({
+    labels: true,
+    height: 200,
+    splitChannels: true,
+  }) ], sampleRate: 22050 })
 
 // wavesurfere.on('click', () => { wavesurfer.play() })
 // Now, create a Web Audio equalizer
