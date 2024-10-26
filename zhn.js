@@ -22,58 +22,56 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
 
 // Create your own media element
 // const audio = new Audio(); audio.controls = true; audio.src = options.url
-
+loop = {/** Render each audio channel as a separate waveform */
+  splitChannels: false }
 delete options.barWidth
-Object.assign(options, { dragToSeek: !0,
-  /** Render each audio channel as a separate waveform */
-  splitChannels: false
+Object.assign(options, { dragToSeek: !0, ...loop
   // , barWidth: 2
-})
+  , plugins: [ WaveSurfer.Hover.create({
+    lineColor: '#ff0000', lineWidth: 2, labelBackground: '#555', labelColor: '#fff',
+  labelSize: '11px' }),
+  WaveSurfer.Timeline.create({ height: 20, timeInterval: 5,
+    primaryLabelInterval: max, secondaryLabelInterval: max, secondaryLabelOpacity: .5,
+  style: { fontSize: '20px', color: '#6A3274'} }),
+  WaveSurfer.Spectrogram.create({ labels: true, height: 200, splitChannels: true
+  }) ], sampleRate: 22050, /**
+ * Render a waveform as a squiggly line
+ * @see https://css-tricks.com/making-an-audio-waveform-visualizer-with-vanilla-javascript/
+ */
+renderFunction: (channels, ctx) => {
+  const { width, height } = ctx.canvas
+  const scale = channels[0].length / width
+  const step = 10
+
+  ctx.translate(0, height / 2)
+  ctx.strokeStyle = ctx.fillStyle
+  ctx.beginPath()
+
+  for (let i = 0; i < width; i += step * 2) {
+    const index = Math.floor(i * scale)
+    const value = Math.abs(channels[0][index])
+    let x = i
+    let y = value * height
+
+    ctx.moveTo(x, 0)
+    ctx.lineTo(x, y)
+    ctx.arc(x + step / 2, y, step / 2, Math.PI, 0, true)
+    ctx.lineTo(x + step, 0)
+
+    x = x + step
+    y = -y
+    ctx.moveTo(x, 0)
+    ctx.lineTo(x, y)
+    ctx.arc(x + step / 2, y, step / 2, Math.PI, 0, false)
+    ctx.lineTo(x + step, 0)
+  }
+
+  ctx.stroke()
+ctx.closePath() } })
 // options2 = options; options2['url'] = media: audio
 // Create a WaveSurfer instance and pass the media element
 max = 20
-let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Hover.create({
-      lineColor: '#ff0000', lineWidth: 2, labelBackground: '#555', labelColor: '#fff',
-    labelSize: '11px' }),
-    WaveSurfer.Timeline.create({ height: 20, timeInterval: 5,
-      primaryLabelInterval: max, secondaryLabelInterval: max, secondaryLabelOpacity: .5,
-    style: { fontSize: '20px', color: '#6A3274'} }),
-    WaveSurfer.Spectrogram.create({ labels: true, height: 200, splitChannels: true
-    }) ], sampleRate: 22050, /**
-   * Render a waveform as a squiggly line
-   * @see https://css-tricks.com/making-an-audio-waveform-visualizer-with-vanilla-javascript/
-   */
-  renderFunction: (channels, ctx) => {
-    const { width, height } = ctx.canvas
-    const scale = channels[0].length / width
-    const step = 10
-
-    ctx.translate(0, height / 2)
-    ctx.strokeStyle = ctx.fillStyle
-    ctx.beginPath()
-
-    for (let i = 0; i < width; i += step * 2) {
-      const index = Math.floor(i * scale)
-      const value = Math.abs(channels[0][index])
-      let x = i
-      let y = value * height
-
-      ctx.moveTo(x, 0)
-      ctx.lineTo(x, y)
-      ctx.arc(x + step / 2, y, step / 2, Math.PI, 0, true)
-      ctx.lineTo(x + step, 0)
-
-      x = x + step
-      y = -y
-      ctx.moveTo(x, 0)
-      ctx.lineTo(x, y)
-      ctx.arc(x + step / 2, y, step / 2, Math.PI, 0, false)
-      ctx.lineTo(x + step, 0)
-    }
-
-    ctx.stroke()
-    ctx.closePath()
-} })
+let wavesurfere = WaveSurfer.create({...options })
 
 // wavesurfere.on('click', () => { wavesurfer.play() })
 // Now, create a Web Audio equalizer
@@ -155,17 +153,16 @@ wavesurfer.on("ready", () => { dq('#waveform > div').remove()
 old_element.parentNode.replaceChild(new_element, old_element) } )
 
 const form = document.createElement('form')
-Object.assign(form.style, {
-  display: 'flex',
+Object.assign(form.style, { display: 'flex',
   flexDirection: 'column',
   gap: '1rem',
   padding: '1rem',
 })
 
-document.body.appendChild(form)
+dq('.mt-sm > .flex').appendChild(form)
 
-for (const key in options) {
-  if (options[key] === undefined) continue
+for (const key in loop) {
+  if (loop[key] === undefined) continue
   const isColor = key.includes('Color')
 
   const label = document.createElement('label')
@@ -183,15 +180,15 @@ for (const key in options) {
   label.appendChild(span)
 
   const input = document.createElement('input')
-  const type = typeof options[key]
+  const type = typeof loop[key]
   Object.assign(input, {
     type: isColor ? 'color' : type === 'number' ? 'range' : type === 'boolean' ? 'checkbox' : 'text',
     name: key,
-    value: options[key],
-    checked: options[key] === true,
+    value: loop[key],
+    checked: loop[key] === true,
   })
   if (input.type === 'text') input.style.flex = 1
-  if (options[key] instanceof HTMLElement) input.disabled = true
+  if (loop[key] instanceof HTMLElement) input.disabled = true
 
   if (schema[key]) {
     Object.assign(input, schema[key])
@@ -202,16 +199,16 @@ for (const key in options) {
 
   input.oninput = () => {
     if (type === 'number') {
-      options[key] = input.valueAsNumber
+      loop[key] = input.valueAsNumber
     } else if (type === 'boolean') {
-      options[key] = input.checked
+      loop[key] = input.checked
     } else if (schema[key] && schema[key].type === 'json') {
-      options[key] = JSON.parse(input.value)
+      loop[key] = JSON.parse(input.value)
     } else {
-      options[key] = input.value
+      loop[key] = input.value
     }
-    wavesurfer.setOptions(options)
-    textarea.value = JSON.stringify(options, null, 2)
+    wavesurfer.setOptions({...options, ...loop})
+    // textarea.value = JSON.stringify(options, null, 2)
   }
 }
 const waveform = document.querySelector('#waveform');
