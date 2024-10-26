@@ -1,0 +1,5 @@
+#waveform ::part(cursor) { top: 28px }
+
+#waveform ::part(cursor):after {
+    content: '🏄'; font-size: 1.5em; position: absolute; left: 0; top: -28px;
+transform: translateX(-50%) }
