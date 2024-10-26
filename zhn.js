@@ -22,19 +22,17 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
 
 // Create your own media element
 // const audio = new Audio(); audio.controls = true; audio.src = options.url
-loop = {/** Render each audio channel as a separate waveform */
+ops = {/** Render each audio channel as a separate waveform */
   splitChannels: false }
-delete options.barWidth
-Object.assign(options, { dragToSeek: !0, ...loop
+delete options.barWidth; plugs = [ WaveSurfer.Hover.create({
+  lineColor: '#ff0000', lineWidth: 2, labelBackground: '#555', labelColor: '#fff',
+labelSize: '11px' }),
+WaveSurfer.Timeline.create({ height: 20, timeInterval: 5,
+  primaryLabelInterval: max, secondaryLabelInterval: max, secondaryLabelOpacity: .5,
+style: { fontSize: '20px', color: '#6A3274'} }) ]
+Object.assign(options, { dragToSeek: !0, ...ops
   // , barWidth: 2
-  , plugins: [ WaveSurfer.Hover.create({
-    lineColor: '#ff0000', lineWidth: 2, labelBackground: '#555', labelColor: '#fff',
-  labelSize: '11px' }),
-  WaveSurfer.Timeline.create({ height: 20, timeInterval: 5,
-    primaryLabelInterval: max, secondaryLabelInterval: max, secondaryLabelOpacity: .5,
-  style: { fontSize: '20px', color: '#6A3274'} }),
-  WaveSurfer.Spectrogram.create({ labels: true, height: 200, splitChannels: true
-  }) ], sampleRate: 22050, /**
+  , plugins: plugs, sampleRate: 22050, /**
  * Render a waveform as a squiggly line
  * @see https://css-tricks.com/making-an-audio-waveform-visualizer-with-vanilla-javascript/
  */
@@ -153,15 +151,15 @@ wavesurfer.on("ready", () => { dq('#waveform > div').remove()
 old_element.parentNode.replaceChild(new_element, old_element) } )
 
 const form = document.createElement('form')
-Object.assign(form.style, { display: 'flex',
+Object.assign( form.style, { display: 'flex',
   flexDirection: 'column',
   gap: '1rem',
   padding: '1rem',
-})
+} )
 
 dq('.mt-sm > .flex').appendChild(form)
 
-for (const key in loop) {
+run = (loop = ops) => {for (const key in loop) {
   if (loop[key] === undefined) continue
   const isColor = key.includes('Color')
 
@@ -190,9 +188,9 @@ for (const key in loop) {
   if (input.type === 'text') input.style.flex = 1
   if (loop[key] instanceof HTMLElement) input.disabled = true
 
-  if (schema[key]) {
-    Object.assign(input, schema[key])
-  }
+  // if (schema[key]) {
+  //   Object.assign(input, schema[key])
+  // }
 
   label.appendChild(input)
   form.appendChild(label)
@@ -201,16 +199,21 @@ for (const key in loop) {
     if (type === 'number') {
       loop[key] = input.valueAsNumber
     } else if (type === 'boolean') {
-      loop[key] = input.checked
-    } else if (schema[key] && schema[key].type === 'json') {
-      loop[key] = JSON.parse(input.value)
+      loop[key] = input.checked;  if (key == 'Spectrogram') { if (loop[key]) {
+        options.plugins = [...plugs,
+          WaveSurfer.Spectrogram.create({ labels: true, height: 200, splitChannels: true
+          })] } else {options.plugins = plugs } }
+    // } else if (schema[key] && schema[key].type === 'json') {
+    //   loop[key] = JSON.parse(input.value)
     } else {
       loop[key] = input.value
     }
-    wavesurfer.setOptions({...options, ...loop})
+    if(ops.hasOwnProperty(key)) {wavesurfere.setOptions({...options, ...loop})} else {
+      wavesurfere.setOptions({...options})
+    }
     // textarea.value = JSON.stringify(options, null, 2)
-  }
-}
+} }}
+run(); run({Spectrogram: !1})
 const waveform = document.querySelector('#waveform');
 // Hover effect
 { hover = d.createElement('div')
@@ -220,8 +223,7 @@ const waveform = document.querySelector('#waveform');
 }
 
 // Current time & duration
-{
-  const formatTime = (seconds) => {
+{ const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60)
     const secondsRemainder = Math.round(seconds) % 60
     const paddedSeconds = `0${secondsRemainder}`.slice(-2)
