@@ -26,7 +26,7 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
 // audio.src = options.url
 
 delete options.barWidth
-Object.assign(options, { dragToSeek: !0 })
+Object.assign(options, { dragToSeek: !0, barWidth: 2 })
 // options2 = options; options2['url'] = media: audio
 // Create a WaveSurfer instance and pass the media element
 max = 20
@@ -71,7 +71,7 @@ let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Hover.cre
 
     ctx.stroke()
     ctx.closePath()
-  } })
+} })
 
 // wavesurfere.on('click', () => { wavesurfer.play() })
 // Now, create a Web Audio equalizer
@@ -151,6 +151,36 @@ wavesurfer.on("ready", () => { dq('#waveform > div').remove()
   new_element.addEventListener("click", function () {
     wavesurfere.playPause() })
 old_element.parentNode.replaceChild(new_element, old_element) } )
+
+  const waveform = document.querySelector('#waveform');
+// Hover effect
+{ hover = d.createElement('div')
+  Object.assign(hover, { id: 'hover' }); waveform.appendChild(hover)
+  // const hover = document.querySelector('#hover')
+  waveform.addEventListener('pointermove', (e) => (hover.style.width = `${e.offsetX}px`))
+}
+
+// Current time & duration
+{
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60)
+    const secondsRemainder = Math.round(seconds) % 60
+    const paddedSeconds = `0${secondsRemainder}`.slice(-2)
+    return `${minutes}:${paddedSeconds}`
+  }
+
+  const timeEl = document.createElement('div')
+  Object.assign(timeEl, { id: 'time' })
+  // querySelector('#time')
+  const durationEl = document.createElement('div')
+  Object.assign(durationEl, { id: 'duration' })
+  // querySelector('#duration')
+  waveform.appendChild(timeEl); waveform.appendChild(durationEl)
+  wavesurfer.on('decode', (duration) =>
+    (durationEl.textContent = formatTime(duration)))
+  wavesurfer.on('timeupdate', (currentTime) =>
+    (timeEl.textContent = formatTime(currentTime)))
+}
 // d.getElementById("playPauseBtn")
 // const speeds = [0.5, 1, 1.5, 2, 3];
 // // Set the playback rate
