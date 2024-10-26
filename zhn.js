@@ -21,12 +21,12 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
 })
 
 // Create your own media element
-// const audio = new Audio()
-// audio.controls = true
-// audio.src = options.url
+// const audio = new Audio(); audio.controls = true; audio.src = options.url
 
 delete options.barWidth
-Object.assign(options, { dragToSeek: !0
+Object.assign(options, { dragToSeek: !0,
+  /** Render each audio channel as a separate waveform */
+  splitChannels: false
   // , barWidth: 2
 })
 // options2 = options; options2['url'] = media: audio
@@ -154,7 +154,67 @@ wavesurfer.on("ready", () => { dq('#waveform > div').remove()
     wavesurfere.playPause() })
 old_element.parentNode.replaceChild(new_element, old_element) } )
 
-  const waveform = document.querySelector('#waveform');
+const form = document.createElement('form')
+Object.assign(form.style, {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem',
+  padding: '1rem',
+})
+
+document.body.appendChild(form)
+
+for (const key in options) {
+  if (options[key] === undefined) continue
+  const isColor = key.includes('Color')
+
+  const label = document.createElement('label')
+  Object.assign(label.style, {
+    display: 'flex',
+    alignItems: 'center',
+  })
+
+  const span = document.createElement('span')
+  Object.assign(span.style, {
+    textTransform: 'capitalize',
+    width: '7em',
+  })
+  span.textContent = `${key.replace(/[a-z0-9](?=[A-Z])/g, '$& ')}: `
+  label.appendChild(span)
+
+  const input = document.createElement('input')
+  const type = typeof options[key]
+  Object.assign(input, {
+    type: isColor ? 'color' : type === 'number' ? 'range' : type === 'boolean' ? 'checkbox' : 'text',
+    name: key,
+    value: options[key],
+    checked: options[key] === true,
+  })
+  if (input.type === 'text') input.style.flex = 1
+  if (options[key] instanceof HTMLElement) input.disabled = true
+
+  if (schema[key]) {
+    Object.assign(input, schema[key])
+  }
+
+  label.appendChild(input)
+  form.appendChild(label)
+
+  input.oninput = () => {
+    if (type === 'number') {
+      options[key] = input.valueAsNumber
+    } else if (type === 'boolean') {
+      options[key] = input.checked
+    } else if (schema[key] && schema[key].type === 'json') {
+      options[key] = JSON.parse(input.value)
+    } else {
+      options[key] = input.value
+    }
+    wavesurfer.setOptions(options)
+    textarea.value = JSON.stringify(options, null, 2)
+  }
+}
+const waveform = document.querySelector('#waveform');
 // Hover effect
 { hover = d.createElement('div')
   Object.assign(hover, { id: 'hover' }); waveform.appendChild(hover)
