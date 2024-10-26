@@ -1,11 +1,11 @@
 #waveform ::part(cursor) { top: 28px }
 
-#waveform ::part(cursor):after {
-    content: '🏄'; font-size: 1.5em; position: absolute; left: 0; top: -28px;
-transform: translateX(-50%) }
+#waveform ::part(cursor):after { content: '🏄'; font-size: 1.5em; position: absolute; left: 0;
+top: -28px; transform: translateX(-50%) }
 
-#hover { position: absolute; left: 0;
-    top: 0;
+#waveform ::part(timeline-wrapper){ z-index: 10; position: relative }
+
+#hover { position: absolute; left: 0; top: 0;
     z-index: 10;
     pointer-events: none;
     height: 100%;
