@@ -25,22 +25,53 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
 // audio.controls = true
 // audio.src = options.url
 
-// delete options.url; Object.assign(options, {media: audio})
-// options2 = options; options2['url'] = 
+delete options.barWidth
+Object.assign(options, { dragToSeek: !0 })
+// options2 = options; options2['url'] = media: audio
 // Create a WaveSurfer instance and pass the media element
 max = 20
 let wavesurfere = WaveSurfer.create({...options, plugins: [ WaveSurfer.Hover.create({
-    lineColor: '#ff0000', lineWidth: 2, labelBackground: '#555',
-    labelColor: '#fff',
-    labelSize: '11px' }), WaveSurfer.Timeline.create({ height: 20, timeInterval: 5,
-  primaryLabelInterval: max,
-  secondaryLabelInterval: max, secondaryLabelOpacity: .5,
-  style: { fontSize: '20px', color: '#6A3274',
-  } }), WaveSurfer.Spectrogram.create({
-    labels: true,
-    height: 200,
-    splitChannels: true,
-  }) ], sampleRate: 22050 })
+      lineColor: '#ff0000', lineWidth: 2, labelBackground: '#555', labelColor: '#fff',
+    labelSize: '11px' }),
+    WaveSurfer.Timeline.create({ height: 20, timeInterval: 5,
+      primaryLabelInterval: max, secondaryLabelInterval: max, secondaryLabelOpacity: .5,
+    style: { fontSize: '20px', color: '#6A3274'} }),
+    WaveSurfer.Spectrogram.create({ labels: true, height: 200, splitChannels: true
+    }) ], sampleRate: 22050, /**
+   * Render a waveform as a squiggly line
+   * @see https://css-tricks.com/making-an-audio-waveform-visualizer-with-vanilla-javascript/
+   */
+  renderFunction: (channels, ctx) => {
+    const { width, height } = ctx.canvas
+    const scale = channels[0].length / width
+    const step = 10
+
+    ctx.translate(0, height / 2)
+    ctx.strokeStyle = ctx.fillStyle
+    ctx.beginPath()
+
+    for (let i = 0; i < width; i += step * 2) {
+      const index = Math.floor(i * scale)
+      const value = Math.abs(channels[0][index])
+      let x = i
+      let y = value * height
+
+      ctx.moveTo(x, 0)
+      ctx.lineTo(x, y)
+      ctx.arc(x + step / 2, y, step / 2, Math.PI, 0, true)
+      ctx.lineTo(x + step, 0)
+
+      x = x + step
+      y = -y
+      ctx.moveTo(x, 0)
+      ctx.lineTo(x, y)
+      ctx.arc(x + step / 2, y, step / 2, Math.PI, 0, false)
+      ctx.lineTo(x + step, 0)
+    }
+
+    ctx.stroke()
+    ctx.closePath()
+  } })
 
 // wavesurfere.on('click', () => { wavesurfer.play() })
 // Now, create a Web Audio equalizer
