@@ -26,7 +26,9 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString}`, {
 // audio.src = options.url
 
 delete options.barWidth
-Object.assign(options, { dragToSeek: !0, barWidth: 2 })
+Object.assign(options, { dragToSeek: !0
+  // , barWidth: 2
+})
 // options2 = options; options2['url'] = media: audio
 // Create a WaveSurfer instance and pass the media element
 max = 20
