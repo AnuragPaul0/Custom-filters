@@ -157,14 +157,14 @@ wavesurfer.on("ready", () => { dq('#waveform > div').remove()
     wavesurfere.playPause() })
 old_element.parentNode.replaceChild(new_element, old_element) } )
 
-const form = document.createElement('form')
-Object.assign( form.style, { display: 'flex',
+const forms = document.createElement('form')
+Object.assign( forms.style, { display: 'flex',
   flexDirection: 'column',
   gap: '1rem',
   padding: '1rem',
 } )
 
-dq('.mt-sm > .flex').appendChild(form)
+dq('.mt-sm > .flex').appendChild(forms)
 
 run = (loop = ops) => {for (const key in loop) {
   if (loop[key] === undefined) continue
@@ -200,7 +200,7 @@ run = (loop = ops) => {for (const key in loop) {
   // }
 
   label.appendChild(input)
-  form.appendChild(label)
+  forms.appendChild(label)
 
   input.oninput = () => {
     if (type === 'number') {
