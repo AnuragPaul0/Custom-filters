@@ -31,7 +31,7 @@ fetch(`https://cdn.hnup.date/generated_audio.mp3?${queryString2}`, {
 // const audio = new Audio(); audio.controls = true; audio.src = options.url
 ops = {/** Render each audio channel as a separate waveform */
   splitChannels: false }
-delete options.barWidth; plugs = [ WaveSurfer.Hover.create({
+delete options.barWidth; max = 20; plugs = [ WaveSurfer.Hover.create({
   lineColor: '#ff0000', lineWidth: 2, labelBackground: '#555', labelColor: '#fff',
 labelSize: '11px' }),
 WaveSurfer.Timeline.create({ height: 20, timeInterval: 5,
@@ -75,7 +75,6 @@ renderFunction: (channels, ctx) => {
 ctx.closePath() } })
 // options2 = options; options2['url'] = media: audio
 // Create a WaveSurfer instance and pass the media element
-max = 20
 let wavesurfere = WaveSurfer.create({...options })
 
 // wavesurfere.on('click', () => { wavesurfer.play() })
