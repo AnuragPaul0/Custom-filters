@@ -2,11 +2,11 @@
 d = document, dq = (x) => { k = d.querySelector(x)
   // , console.log(k)
   return k }
-now2 = new Date();
-const day2 = String(now2.getUTCDate()).padStart(2, "0");
-const month2 = String(now2.getUTCMonth() + 1).padStart(2, "0");
-const year2 = String(now2.getUTCFullYear()).slice(-2);
-const hour2 = String(now2.getUTCHours()).padStart(2, "0");
+now2 = new Date()
+const day2 = String(now2.getUTCDate()).padStart(2, "0")
+const month2 = String(now2.getUTCMonth() + 1).padStart(2, "0")
+const year2 = String(now2.getUTCFullYear()).slice(-2)
+const hour2 = String(now2.getUTCHours()).padStart(2, "0")
 
 const queryString2 = `cachebuster=${day2}${month2}${year2}${hour2}`
 
