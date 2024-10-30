@@ -1,0 +1,36 @@
+Hi! My name is Anurag Paul and here's a little bit about me and what I'm looking for...
+
+Education
+Indian Institute of Technology Bhubaneswar Bhubaneswar, Odisha
+Bachelor of Technology in Electronics and Communication Engineering Aug. 2020 - May 2024
+
+Experience
+Undergraduate Research Assistant May - July, 2023
+IIT Bhubaneswar Bhubaneswar, Odisha
+• MATLAB based robust Implementation and performance evaluation of LT codes iterative encoding/decoding.
+• Applied algorithms of the LT Codes, an error correction code based on the principles of Fountain Codes.
+• Created function that generate indexes and degrees based on the ideal soliton and robust soliton distributions,
+encoding symbols at about 1.63 MB/s.
+
+Projects
+Open in Drive | React, TypeScript October 2024
+• Link, to open a pdf in google drive without downloading, appears when the user inputs a pdf web link in mobile.
+Open Graph protocol enabled to become a rich object in a social graph.
+• Added X Cards, to attach rich media experiences to Tweets, helping to drive traffic to the website.
+• Used supported language and region codes to target different language speakers. Added unmatched languages
+support when no other language/region matches the user’s browser setting.
+
+RetainIQ’s Drag and Drop | React, Next.Js, Git August - September, 2024
+• Implemented RetainIQ’s Frontend user interface (UI) resembling a table structure. Each row represents a state,
+with the first column dedicated to product filters and the subsequent columns representing design variants.
+• Created a response structure which hard-coded for the functionalities including dynamically Add/Delete a
+Row/Column, Row Reordering using drag-and-drop and Design Insertion into a specific column.
+• If columns added are more than 3 then it has a scroll. Hosted on Vercel.
+
+Three men’s morris | HTML/CSS, Javascript July 2024
+• Developed a abstract strategy game, played on a 3 × 3 board that is similar to tic-tac-toe.
+• The SVG and its parts are made dynamic throughout the game-play where element attributes, class and id play
+their crucial roles. Hosted on GitHub Pages.
+• Used 2D geometry and event listeners such as mousedown and mouseenter to form the inner mechanics.
+
+Looking for work-life balance and opportunities for growth.
